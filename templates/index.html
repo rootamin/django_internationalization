@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+    {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %}class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class="container text-center">
+        <center><h1>{% trans 'herotitle' %}</h1></center>
+    </div>
+    <div class="container">
+        {% for post in posts %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">{{ post.created|timesince }} {% trans 'ago' %}, {{ post.category.name }}</h6>
+                    <p class="card-text">{{ post.content }}</p>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}
